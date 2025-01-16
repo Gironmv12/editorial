@@ -14,6 +14,8 @@
             </svg>
         </button>
     </div>
+
+    <!-- Contenido principal -->
     
     <section class="p-6 mt-6 flex flex-col lg:flex-row gap-8">
         @include('components.sidebarComponent')
@@ -35,6 +37,8 @@
             
         </div>
     </section>
+
+    
 
     <!--seccion donde se va a consumir las apis y funcionalidades, usar AJAX-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -60,7 +64,7 @@
                             booksHtml += `
                                 <div class="border rounded-lg overflow-hidden bg-white shadow-sm">
                                     <div class="aspect-[3/4] relative bg-gray-100">
-                                        <img src="/storage/${book.imagen}" alt="${book.titulo}" class="absolute inset-0 w-full h-full object-cover">
+                                        <img src="/storage/${book.imagen}" alt="${book.titulo}" class="absolute inset-0 w-full h-full object-cover transition-all duration-300 hover:scale-110">
                                         <span class="absolute bottom-2 right-2 px-2 py-1 rounded text-xs ${book.tipo === 'gratuito' ? 'bg-[#F1F5F9]' : 'bg-blue-500'} ">
                                             ${book.tipo.charAt(0).toUpperCase() + book.tipo.slice(1)}
                                         </span>

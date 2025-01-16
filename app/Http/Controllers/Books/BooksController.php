@@ -321,8 +321,8 @@ class BooksController extends Controller
             $limit = $request->input('limit', 8);
             $offset = ($page - 1) * $limit;
     
-            $libros = Libro::skip($offset)->take($limit)->get();
-            $total = Libro::count();
+            $libros = Libro::where('desactivar', 0)->skip($offset)->take($limit)->get();
+            $total = Libro::where('desactivar', 0)->count();
     
             Log::info('Libros paginados obtenidos exitosamente');
             return response()->json([

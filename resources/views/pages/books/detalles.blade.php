@@ -66,7 +66,7 @@
                 {{-- Categorías y Tipo --}}
                 <div class="space-y-2">
                     <div class="flex flex-wrap gap-2">
-                        <span class="inline-flex items-center rounded-full border border-gray-200 px-2.5 py-0.5 text-xs font-medium text-gray-700">
+                        <span class="inline-flex items-center rounded-full border border-gray-200 px-2.5 py-0.5 text-xs font-medium text-gray-700 capitalize">
                             {{ htmlspecialchars($libro->tipo) }}
                         </span>
 
