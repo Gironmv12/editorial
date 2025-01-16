@@ -55,6 +55,8 @@ Route::get('/eventos', function () {
     return view('pages.catalogos.eventos');
 })->name('eventospage');
 
+Route::get('/libro/{id}', [App\Http\Controllers\Books\BooksUtility::class, 'show'])->name('detallesBook.show');
+
 
 
 //paginas del dashboard
