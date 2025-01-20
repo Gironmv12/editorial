@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Validation\ValidationException;
+use App\Models\Catalogo;
 
 class BooksController extends Controller
 {
@@ -189,6 +190,9 @@ class BooksController extends Controller
 
         $libro = Libro::findOrFail($id);
 
+        // Llenar el modelo primero
+        $libro->fill($validator->validated());
+
         // Manejar la carga de imagen
         if ($request->hasFile('imagen')) {
             $imagenPath = $request->file('imagen')->store('images/libros', 'public');
@@ -197,8 +201,9 @@ class BooksController extends Controller
 
         // Manejar la carga de archivo PDF
         if ($request->hasFile('archivo_pdf')) {
-            $pdfPath = $request->file('archivo_pdf')->store('archivos/pdf', 'public');
-            $libro->archivo_pdf = $pdfPath;
+            $pdfName = time().'_'.$request->file('archivo_pdf')->getClientOriginalName();
+            $pdfPath = $request->file('archivo_pdf')->move(public_path('archivos/pdf'), $pdfName);
+            $libro->archivo_pdf = 'archivos/pdf/' . $pdfName;
         }
 
         // Manejar la carga de archivo EPUB
@@ -207,7 +212,6 @@ class BooksController extends Controller
             $libro->archivo_epub = $epubPath;
         }
 
-        $libro->fill($validator->validated());
         $libro->save();
 
         // Asignar categorías si se proporcionan

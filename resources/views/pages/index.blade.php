@@ -90,8 +90,8 @@
                                             </button>
                                         </div>
                                         <button onclick="window.location.href='/libro/${book.id_libro}'" class="mt-2 flex w-full items-center justify-center align-content-center gap-1 text-gray-600 text-sm border rounded px-3 py-1.5 hover:bg-[#005295] hover:text-[#FFFFFF] transition-colors">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-    Ver más
+                                            
+    Ver detalles
 </button>
                                         
                                     </div>

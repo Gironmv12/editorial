@@ -23,8 +23,8 @@
                 <div class="space-y-2">
 
                     <a
-                    href="{{ $libro->archivo_pdf }}"
-                    download
+                    href="{{ asset($libro->archivo_pdf) }}"
+                    target="_blank"
                     class="flex w-full items-center justify-center rounded-md bg-[#003D75] px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 active:bg-gray-800"
                 >
                     <svg
@@ -37,7 +37,7 @@
                     >
                         <path d="M7 7h10v10M7 17l10-10" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
-                    Descargar PDF
+                    Ver Archivo Digital(pdf)
                 </a>
 
 

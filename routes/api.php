@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Books\BooksController;
+use App\Http\Controllers\Books\BooksUtility;
 use App\Http\Controllers\Categorias\CategoriasController;
 use App\Http\Controllers\Catalogos\CatalogosController;
 //test de prueba
@@ -85,3 +86,9 @@ Route::prefix('catalogos')->group(function () {
     //ruta para eliminar un catalogo
     Route::delete('/{id}', [CatalogosController::class, 'deleteCatalogo']);
 });
+
+Route::get('/catalogo/libros-LEEUNACH', [BooksUtility::class, 'getLibrosDisponibles']);
+Route::get('/catalogo/libros-CUADERNOSUNIVERSITARIOS', [BooksUtility::class, 'getBooksCatalogoCuadernos']);
+Route::get('/catalogo/libros-TEXTOSUNACH', [BooksUtility::class, 'getBooksCatalogoTextos']);
+Route::get('/catalogo/libros-LETRASSINPAPEL', [BooksUtility::class, 'getBooksCatalogoLetras']);
+Route::get('/catalogo/libros-EVENTOS', [BooksUtility::class, 'getBooksCatalogoEventos']);
