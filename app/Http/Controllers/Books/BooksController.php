@@ -80,40 +80,21 @@ class BooksController extends Controller
                 $imagenPath = null;
             }
             
-            // Manejar la carga de archivo PDF
-            if ($request->file('archivo_pdf')) {
-                try {
-                    Log::info('Iniciando la carga del archivo PDF del libro.');
-                    $pdfPath = $request->file('archivo_pdf')->store('archivos/pdf', 'public');
-                    Log::info('Archivo PDF subido exitosamente: ' . $pdfPath);
-                } catch (Exception $e) {
-                    Log::error('Error al subir el archivo PDF: ' . $e->getMessage());
-                    return response()->json(['message' => 'Error al subir el archivo PDF.'], 500);
-                }
-            } else {
-                Log::info('No se proporcionó archivo PDF para el libro.');
-                $pdfPath = null;
-            }
-    
-            // Manejar la carga de archivo EPUB
-            if ($request->file('archivo_epub')) {
-                try {
-                    Log::info('Iniciando la carga del archivo EPUB del libro.');
-                    $epubPath = $request->file('archivo_epub')->store('archivos/epub', 'public');
-                    Log::info('Archivo EPUB subido exitosamente: ' . $epubPath);
-                } catch (Exception $e) {
-                    Log::error('Error al subir el archivo EPUB: ' . $e->getMessage());
-                    return response()->json(['message' => 'Error al subir el archivo EPUB.'], 500);
-                }
-            } else {
-                Log::info('No se proporcionó archivo EPUB para el libro.');
-                $epubPath = null;
-            }
+            
     
             $libro = new Libro();
-            $libro->imagen = $imagenPath;
-            $libro->archivo_pdf = $pdfPath;
-            $libro->archivo_epub = $epubPath;
+            // Manejar la carga de archivo PDF
+            if ($request->hasFile('archivo_pdf')) {
+                $pdfName = time().'_'.$request->file('archivo_pdf')->getClientOriginalName();
+                $pdfPath = $request->file('archivo_pdf')->move(public_path('archivos/pdf'), $pdfName);
+                $libro->archivo_pdf = 'archivos/pdf/' . $pdfName;
+            }
+
+            // Manejar la carga de archivo EPUB
+            if ($request->hasFile('archivo_epub')) {
+                $epubPath = $request->file('archivo_epub')->store('archivos/epub', 'public');
+                $libro->archivo_epub = $epubPath;
+            }
             $libro->titulo = $request->input('titulo');
             $libro->isbn = $request->input('isbn');
             $libro->calificacion = $request->input('calificacion');

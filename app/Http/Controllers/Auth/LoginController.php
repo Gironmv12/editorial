@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Usuario;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -25,8 +26,9 @@ class LoginController extends Controller
             return redirect()->back()->withErrors(['error' => 'Credenciales inválidas']);
         }
 
-        // Almacenar el nombre del usuario y el rol en la sesión
+        // Almacenar el ID del usuario, nombre del usuario y el rol en la sesión
         session([
+            'id_usuario' => $usuario->id_usuario,
             'nombre_usuario' => $usuario->nombre_usuario,
             'rol' => $usuario->rol,
             'email_usuario' => $usuario->email

@@ -17,12 +17,14 @@ class UserService
             'rol' => 'sometimes|string|in:user,admin',
         ])->validate();
 
-        return Usuario::create([
+        $usuario = Usuario::create([
             'nombre_usuario' => $validatedData['nombre_usuario'],
             'email' => $validatedData['email'],
             'contrasena' => Hash::make($validatedData['contrasena']),
             'rol' => $validatedData['rol'] ?? 'user',
         ]);
+
+        return $usuario; // Asegura que se devuelve el objeto Usuario con id_usuario
     }
 
     public function updateUser(array $data, $id)

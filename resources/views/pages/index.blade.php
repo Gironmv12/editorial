@@ -73,7 +73,7 @@
                                         <h2 class="font-medium text-sm mb-2 truncate">${book.titulo}</h2>
                                         <p class="text-gray-600 text-xs mb-4 truncate">${book.descripcion}</p>
                                         <div class="flex items-center justify-between gap-2">
-                                            <button class="flex items-center gap-1 text-gray-600 text-sm border rounded px-3 py-1.5 hover:bg-gray-50">
+                                            <button class="guardar-btn flex items-center gap-1 text-gray-600 text-sm border rounded px-3 py-1.5 hover:bg-gray-50" data-id_libro="${book.id_libro}">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart">
                                                     <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
                                                 </svg>
@@ -124,6 +124,32 @@
             $('#menu-toggle').click(function(){
                 $('.sidebar').toggleClass('hidden');
             });
+
+            // Controlador de evento para el botón "Guardar"
+            $(document).on('click', '.guardar-btn', function(){
+                var id_libro = $(this).data('id_libro');
+                $.ajax({
+                    url: '/api/deseos',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ id_libro: id_libro }),
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    success: function(response){
+                        alert(response.message);
+                    },
+                    error: function(xhr){
+                        if(xhr.status === 401){
+                            alert('Debe iniciar sesión para guardar un deseo.');
+                        } else {
+                            alert(xhr.responseJSON.message || 'Error al guardar el deseo.');
+                        }
+                    }
+                });
+            });
+
+            
         });
     </script>
     

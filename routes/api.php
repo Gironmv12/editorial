@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Books\BooksController;
 use App\Http\Controllers\Books\BooksUtility;
+use App\Http\Controllers\Deseos\DeseosController;
 use App\Http\Controllers\Categorias\CategoriasController;
 use App\Http\Controllers\Catalogos\CatalogosController;
 //test de prueba
@@ -80,7 +81,7 @@ Route::prefix('catalogos')->group(function () {
     //ruta para crear un catalogo
     Route::post('/', [CatalogosController::class, 'createCatalogo']);  
     //ruta para obtener un catalogo por id
-    Route::get('/{id}', [CatalogosController::class, 'getCatalogo']);
+    Route::get('/{id}', [CatalogosController::class, 'getCatalogo']);   
     //ruta para actualizar un catalogo
     Route::put('/{id}', [CatalogosController::class, 'updateCatalogo']);
     //ruta para eliminar un catalogo
@@ -92,3 +93,6 @@ Route::get('/catalogo/libros-CUADERNOSUNIVERSITARIOS', [BooksUtility::class, 'ge
 Route::get('/catalogo/libros-TEXTOSUNACH', [BooksUtility::class, 'getBooksCatalogoTextos']);
 Route::get('/catalogo/libros-LETRASSINPAPEL', [BooksUtility::class, 'getBooksCatalogoLetras']);
 Route::get('/catalogo/libros-EVENTOS', [BooksUtility::class, 'getBooksCatalogoEventos']);
+
+Route::middleware('web')->post('/deseos', [DeseosController::class, 'CreateDeseo']);    
+Route::get('/deseos/{id}', [DeseosController::class, 'GetDeseos']);

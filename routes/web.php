@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Deseos\DeseosController;
 
 Route::get('/', function () {
     return view('pages.index');
@@ -14,6 +15,8 @@ Route::get('/videos', function () {
 Route::get('/deseos', function () {
     return view('pages.deseos');
 })->name('deseos');
+
+Route::post('/deseos', [DeseosController::class, 'CreateDeseo']);
 
 Route::get('/comparador', function () {
     return view('pages.comparador');

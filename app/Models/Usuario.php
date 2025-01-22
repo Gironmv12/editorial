@@ -33,6 +33,7 @@ class Usuario extends Model
 	protected $table = 'usuarios';
 	protected $primaryKey = 'id_usuario';
 	public $timestamps = false;
+	public $incrementing = true; // Asegurar que sea auto-incremental
 
 	protected $fillable = [
 		'nombre_usuario',
